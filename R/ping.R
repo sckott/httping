@@ -1,6 +1,7 @@
 #' Ping a url, doing a single call, with any http verbs
 #'
 #' @export
+#' @importFrom httpcode http_code
 #' @param url A url
 #' @param verb An http verb, default: \code{\link[httr]{GET}}
 #' @param ... Any httr verb parameters passed on to those functions

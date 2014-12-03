@@ -11,4 +11,5 @@ Depends:
 Imports:
     jsonlite,
     pryr,
-    magrittr
+    magrittr,
+    httpcode
