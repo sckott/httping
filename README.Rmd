@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-`httping` is a tiny R package to Ping urls to time requests. It's a port of the Python [httping](https://github.com/jpignata/httping) library.
+`httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
 
 ## Quick start
 
@@ -46,3 +46,16 @@ the delay between requests are included as attributes.
 res <- GET("http://google.com") %>% time(count=3)
 attributes(res)
 ```
+
+Or print a summary of a response, gives more detail
+
+```{r}
+res %>% summary()
+```
+
+Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like 
+
+```{r}
+GET("http://google.com") %>% time(count=3, verbose = FALSE)
+```
+
