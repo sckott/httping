@@ -7,8 +7,9 @@
 #'
 #' @param .request A httr response object
 #' @param count integer, Number of requests to do.
-#' @param delay integer, Seconds to delay successive calls by.
-#' @param flood logical; If TRUE, no delay between requests. If FALSE, delay by 1 second.
+#' @param delay integer, Seconds to delay successive calls by. Default: 0.5 seconds.
+#' @param flood logical; If TRUE, no delay between requests. If FALSE, delay by 0.5
+#' second.
 #' @param verbose logical; If TRUE, print progress.
 #' @param ... Further args passed on to functions in \code{httr}
 #' @examples \donttest{
@@ -17,12 +18,13 @@
 #' GET("http://google.com") %>% time()
 #' }
 
-time <- function(.request, count=10, delay = 1, flood = FALSE, verbose=TRUE, ...)
+time <- function(.request, count=10, delay = 0.5, flood = FALSE, verbose=TRUE, ...)
 {
   stopifnot(is(.request, "response"))
+  if(flood) delay <- 0 else stopifnot(is(as.numeric(delay), "numeric"))
   if(verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(.request), .request$url, .request$status_code, .request$times[["total"]]*1000), sep = "\n")
   if(count > 1) count_ <- count - 1
-  reps <- replicate(count_, rerequest_(.request, verbose), simplify = FALSE)
+  reps <- replicate(count_, rerequest_(.request, delay, verbose), simplify = FALSE)
   all <- do.call(c, list(list(.request), reps))
   times <- pluck(all, "times")
   nmz <- names(times[[1]])
@@ -38,7 +40,8 @@ time <- function(.request, count=10, delay = 1, flood = FALSE, verbose=TRUE, ...
 
 calc <- function(x, fxn) format(fxn(x*1000, na.rm = TRUE), scientific = FALSE)
 
-rerequest_ <- function(x, verbose=TRUE){
+rerequest_ <- function(x, delay, verbose=TRUE){
+  Sys.sleep(delay)
   tmp <- rerequest(x)
   if(verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(tmp), tmp$url, tmp$status_code, tmp$times[["total"]]*1000), sep = "\n")
   return(tmp)

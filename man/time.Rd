@@ -3,7 +3,7 @@
 \alias{time}
 \title{Ping a url to time the request}
 \usage{
-time(.request, count = 10, delay = 1, flood = FALSE, verbose = TRUE,
+time(.request, count = 10, delay = 0.5, flood = FALSE, verbose = TRUE,
   ...)
 }
 \arguments{
@@ -11,9 +11,10 @@ time(.request, count = 10, delay = 1, flood = FALSE, verbose = TRUE,
 
 \item{count}{integer, Number of requests to do.}
 
-\item{delay}{integer, Seconds to delay successive calls by.}
+\item{delay}{integer, Seconds to delay successive calls by. Default: 0.5 seconds.}
 
-\item{flood}{logical; If TRUE, no delay between requests. If FALSE, delay by 1 second.}
+\item{flood}{logical; If TRUE, no delay between requests. If FALSE, delay by 0.5
+second.}
 
 \item{verbose}{logical; If TRUE, print progress.}
 
