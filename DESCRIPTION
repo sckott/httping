@@ -1,0 +1,13 @@
+Package: httping
+Title: Ping urls to time requests
+Description: Ping urls to time requests.
+Version: 0.0.1.99
+Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
+    email = "myrmecocystus@gmail.com")
+License: MIT + file LICENSE
+LazyData: true
+Imports:
+    httr,
+    jsonlite,
+    pryr,
+    magrittr
