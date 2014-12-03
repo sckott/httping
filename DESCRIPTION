@@ -6,8 +6,9 @@ Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
 LazyData: true
+Depends:
+    httr
 Imports:
-    httr,
     jsonlite,
     pryr,
     magrittr
