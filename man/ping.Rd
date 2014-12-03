@@ -21,7 +21,12 @@ not sure this function is worth having, doesn't do a whole lot...
 \examples{
 \donttest{
 "http://localhost:9200" \%>\% ping()
+"http://localhost:9200" \%>\% ping(config=verbose())
+"http://localhost:9200" \%>\% ping(config=c(verbose(), accept_json()))
+
 "http://localhost:5984" \%>\% ping()
+"http://localhost:5984" \%>\% ping(verb=HEAD)
+"http://localhost:5984" \%>\% ping(verb=PUT)
 "http://google.com" \%>\% ping()
 }
 }
