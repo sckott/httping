@@ -1,0 +1,48 @@
+httping
+=======
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+`httping` is a tiny R package to Ping urls to time requests. It's a port of the Python [httping](https://github.com/jpignata/httping) library.
+
+## Quick start
+
+### Install
+
+```{r eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sckott/httping")
+```
+
+```{r}
+library("httping")
+```
+
+## Pass any httr request to time
+
+A `GET` request
+
+```{r}
+GET("http://google.com") %>% time(count=3)
+```
+
+A `POST` request
+
+```{r}
+POST("http://httpbin.org/post", body = "A simple text string") %>% time(count=3)
+```
+
+The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and 
+the delay between requests are included as attributes. 
+
+```{r}
+res <- GET("http://google.com") %>% time(count=3)
+attributes(res)
+```
