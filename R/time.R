@@ -21,8 +21,8 @@ time <- function(.request, count=10, delay = 1, flood = FALSE, verbose=TRUE, ...
 {
   stopifnot(is(.request, "response"))
   if(verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(.request), .request$url, .request$status_code, .request$times[["total"]]*1000), sep = "\n")
-  if(count > 1) count <- count - 1
-  reps <- replicate(count, rerequest_(.request, verbose), simplify = FALSE)
+  if(count > 1) count_ <- count - 1
+  reps <- replicate(count_, rerequest_(.request, verbose), simplify = FALSE)
   all <- do.call(c, list(list(.request), reps))
   times <- pluck(all, "times")
   nmz <- names(times[[1]])
@@ -56,11 +56,13 @@ print.http_time <- function(x, ...){
 
 #' @export
 summary.http_time <- function(object, ...){
-  cat("<http time, summary>", sep = "\n")
-  cat(paste0("  Avg. total (s): ", object$averages[['total']]), sep = "\n")
-  cat(paste0("  Avg. redirect (s): ", object$averages[['redirect']]), sep = "\n")
-  cat(paste0("  Avg. namelookup time (s): ", object$averages[['namelookup']]), sep = "\n")
-  cat(paste0("  Avg. connect (s): ", object$averages[['connect']]), sep = "\n")
-  cat(paste0("  Avg. pretransfer (s): ", object$averages[['pretransfer']]), sep = "\n")
-  cat(paste0("  Avg. starttransfer (s): ", object$averages[['starttransfer']]), sep = "\n")
+  cat("<http time, averages (min max mean)>", sep = "\n")
+  cat(paste0("  Total (s):           ", p0(object$averages[['total']])), sep = "\n")
+  cat(paste0("  Tedirect (s):        ", p0(object$averages[['redirect']])), sep = "\n")
+  cat(paste0("  Namelookup time (s): ", p0(object$averages[['namelookup']])), sep = "\n")
+  cat(paste0("  Connect (s):         ", p0(object$averages[['connect']])), sep = "\n")
+  cat(paste0("  Pretransfer (s):     ", p0(object$averages[['pretransfer']])), sep = "\n")
+  cat(paste0("  Starttransfer (s):   ", p0(object$averages[['starttransfer']])), sep = "\n")
 }
+
+p0 <- function(x) paste0(x, collapse = " ")
