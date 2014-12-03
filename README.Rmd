@@ -59,3 +59,17 @@ Messages are printed using `cat`, so you can suppress those using `verbose=FALSE
 GET("http://google.com") %>% time(count=3, verbose = FALSE)
 ```
 
+
+## Ping an endpoint
+
+This function is a bit different, accepts a url as first parameter, but can accept any args passed on to `httr` verb functions, like `GET`, `POST`,  etc. 
+
+```{r}
+"http://google.com" %>% ping()
+```
+
+Or pass in additional arguments to modify request
+
+```{r}
+"http://google.com" %>% ping(config=verbose())
+```

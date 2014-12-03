@@ -27,13 +27,13 @@ A `GET` request
 
 ```r
 GET("http://google.com") %>% time(count=3)
-#> 31.312 kb - http://www.google.com/ code:200 time(ms):272.098
-#> 31.312 kb - http://www.google.com/ code:200 time(ms):566.021
-#> 31.304 kb - http://www.google.com/ code:200 time(ms):501.908
+#> 31.304 kb - http://www.google.com/ code:200 time(ms):166.293
+#> 31.304 kb - http://www.google.com/ code:200 time(ms):171.972
+#> 31.304 kb - http://www.google.com/ code:200 time(ms):169.35
 #> <http time>
-#>   Avg. min (ms):  272.098
-#>   Avg. max (ms):  566.021
-#>   Avg. mean (ms): 446.6757
+#>   Avg. min (ms):  166.293
+#>   Avg. max (ms):  171.972
+#>   Avg. mean (ms): 169.205
 ```
 
 A `POST` request
@@ -41,13 +41,13 @@ A `POST` request
 
 ```r
 POST("http://httpbin.org/post", body = "A simple text string") %>% time(count=3)
-#> 10.704 kb - http://httpbin.org/post code:200 time(ms):263.189
-#> 10.704 kb - http://httpbin.org/post code:200 time(ms):98.244
-#> 10.704 kb - http://httpbin.org/post code:200 time(ms):99.834
+#> 10.704 kb - http://httpbin.org/post code:200 time(ms):880.296
+#> 10.704 kb - http://httpbin.org/post code:200 time(ms):96.534
+#> 10.704 kb - http://httpbin.org/post code:200 time(ms):101.717
 #> <http time>
-#>   Avg. min (ms):  98.244
-#>   Avg. max (ms):  263.189
-#>   Avg. mean (ms): 153.7557
+#>   Avg. min (ms):  96.534
+#>   Avg. max (ms):  880.296
+#>   Avg. mean (ms): 359.5157
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and 
@@ -56,9 +56,9 @@ the delay between requests are included as attributes.
 
 ```r
 res <- GET("http://google.com") %>% time(count=3)
-#> 31.312 kb - http://www.google.com/ code:200 time(ms):228.221
-#> 31.312 kb - http://www.google.com/ code:200 time(ms):245.679
-#> 31.312 kb - http://www.google.com/ code:200 time(ms):269.947
+#> 31.304 kb - http://www.google.com/ code:200 time(ms):168.411
+#> 31.304 kb - http://www.google.com/ code:200 time(ms):178.557
+#> 31.304 kb - http://www.google.com/ code:200 time(ms):165.138
 attributes(res)
 #> $names
 #> [1] "times"    "averages" "request" 
@@ -79,12 +79,12 @@ Or print a summary of a response, gives more detail
 ```r
 res %>% summary()
 #> <http time, averages (min max mean)>
-#>   Total (s):           228.221 269.947 247.949
-#>   Tedirect (s):        44.813 59.678 52.144
-#>   Namelookup time (s): 0.028 0.032 0.02933333
-#>   Connect (s):         0.032 0.035 0.033
-#>   Pretransfer (s):     0.087 0.101 0.09333333
-#>   Starttransfer (s):   75.021 117.281 96.507
+#>   Total (s):           165.138 178.557 170.702
+#>   Tedirect (s):        47.861 52.284 49.37533
+#>   Namelookup time (s): 0.025 0.03 0.02766667
+#>   Connect (s):         0.028 0.034 0.03166667
+#>   Pretransfer (s):     0.081 0.091 0.086
+#>   Starttransfer (s):   70.145 81.738 77.61433
 ```
 
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like 
@@ -93,8 +93,30 @@ Messages are printed using `cat`, so you can suppress those using `verbose=FALSE
 ```r
 GET("http://google.com") %>% time(count=3, verbose = FALSE)
 #> <http time>
-#>   Avg. min (ms):  222.951
-#>   Avg. max (ms):  570.968
-#>   Avg. mean (ms): 376.217
+#>   Avg. min (ms):  142.378
+#>   Avg. max (ms):  180.446
+#>   Avg. mean (ms): 156.5313
 ```
 
+
+## Ping an endpoint
+
+This function is a bit different, accepts a url as first parameter, but can accept any args passed on to `httr` verb functions, like `GET`, `POST`,  etc. 
+
+
+```r
+"http://google.com" %>% ping()
+#> <http ping> 200
+#>   Message: OK
+#>   Description: Request fulfilled, document follows
+```
+
+Or pass in additional arguments to modify request
+
+
+```r
+"http://google.com" %>% ping(config=verbose())
+#> <http ping> 200
+#>   Message: OK
+#>   Description: Request fulfilled, document follows
+```
