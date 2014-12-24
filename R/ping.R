@@ -15,11 +15,20 @@
 #' "http://localhost:5984" %>% ping(verb=HEAD)
 #' "http://localhost:5984" %>% ping(verb=PUT)
 #' "http://google.com" %>% ping()
+#'
+#' # pass just a port number, tries to resolve, fails if not found
+#' "9200" %>% ping()
+#' 9200 %>% ping()
+#' 9200 %>% ping(verb=POST)
+#' 9200 %>% ping(verb=HEAD)
+#' 5984 %>% ping()
+#' ping(9200)
+#' ping("9200")
 #' }
 
 ping <- function(url, verb=GET, ...)
 {
-  res <- verb(url, ...)
+  res <- verb(as.url(url)[[1]], ...)
   structure(list(status=res$status_code, request=res), class="http_ping")
 }
 
@@ -29,4 +38,27 @@ print.http_ping <- function(x, ...){
   cat(paste0("<http ping> ", x$status), sep = "\n")
   cat(paste0("  Message: ", vv$message), sep = "\n")
   cat(paste0("  Description: ", vv$explanation), sep = "\n")
+}
+
+as.url <- function(x) UseMethod("as.url")
+as.url.url <- function(x) x
+as.url.character <- function(x){
+  if( is_url(x) )
+    x <- add_http(x)
+  else if( is_port(x) )
+    x <- paste0("http://localhost:", x)
+  else
+    stop("url or port not detected", call. = FALSE)
+  structure(x, class="url")
+}
+as.url.numeric <- function(x) as.url(as.character(x))
+
+is_url <- function(x){
+  grepl("http://", x, ignore.case = TRUE) || grepl("localhost:[0-9]{4}", x, ignore.case = TRUE)
+}
+
+is_port <- function(x) grepl("[[:digit:]]", x) && nchar(x) == 4
+
+add_http <- function(x){
+  if( !grepl("http://", x, ignore.case = TRUE) ) paste0("http://", x) else x
 }
