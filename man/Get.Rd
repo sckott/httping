@@ -34,6 +34,9 @@ Attempts to simplify the http request process by using sensible defaults:
 "http://localhost:9200" \%>\%
    Timeout(3) \%>\%
    Get()
+
+"http://localhost:9200" \%>\%
+   User_agent("howdydoodie")
 }
 }
 

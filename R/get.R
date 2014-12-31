@@ -20,6 +20,9 @@
 #' "http://localhost:9200" %>%
 #'    Timeout(3) %>%
 #'    Get()
+#'
+#' "http://localhost:9200" %>%
+#'    User_agent("howdydoodie")
 #' }
 
 Get <- function(.data, ...)
@@ -69,5 +72,17 @@ Verbose <- function(.data){
 Timeout <- function(.data, seconds){
   .data <- as.request(.data)
   .data <- modifyList(.data, list(config = c( timeout(seconds = seconds) )))
+  .data
+}
+
+User_agent <- function(.data, agent){
+  .data <- as.request(.data)
+  .data <- modifyList(.data, list(config = c( user_agent(agent = agent) )))
+  .data
+}
+
+Authenticate <- function(.data, user, password, type="basic"){
+  .data <- as.request(.data)
+  .data <- modifyList(.data, list(config = c( authenticate(user=user, password=password, type=type) )))
   .data
 }
