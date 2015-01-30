@@ -56,33 +56,3 @@ as.request.request <- function(x) x
 as.request.character <- function(x){
   if( is_url(tryCatch(as.url(x), error=function(e) e)) ) request(x)  else stop("error ...")
 }
-
-Progress <- function(.data){
-  .data <- as.request(.data)
-  .data <- modifyList(.data, list(config = c( progress() )))
-  .data
-}
-
-Verbose <- function(.data){
-  .data <- as.request(.data)
-  .data <- modifyList(.data, list(config = c( verbose() )))
-  .data
-}
-
-Timeout <- function(.data, seconds){
-  .data <- as.request(.data)
-  .data <- modifyList(.data, list(config = c( timeout(seconds = seconds) )))
-  .data
-}
-
-User_agent <- function(.data, agent){
-  .data <- as.request(.data)
-  .data <- modifyList(.data, list(config = c( user_agent(agent = agent) )))
-  .data
-}
-
-Authenticate <- function(.data, user, password, type="basic"){
-  .data <- as.request(.data)
-  .data <- modifyList(.data, list(config = c( authenticate(user=user, password=password, type=type) )))
-  .data
-}
