@@ -16,8 +16,11 @@ knitr::opts_chunk$set(
 
 ### Install
 
+One non-CRAN dep (`httpcode`) needs to be installed first.
+
 ```{r eval=FALSE}
 install.packages("devtools")
+devtools::install_github("sckott/httpcode")
 devtools::install_github("sckott/httping")
 ```
 
@@ -72,4 +75,35 @@ Or pass in additional arguments to modify request
 
 ```{r}
 "http://google.com" %>% ping(config=verbose())
+```
+
+## Even simpler verbs
+
+Playing around with this idea. `httr` is already easy, but `Get()`:
+
+* Allows use of an intuitive chaining workflow
+* Parses data for you using `httr` built in format guesser, which should work in most cases
+
+A simple GET request
+
+```{r}
+"http://httpbin.org/get" %>%
+  Get()
+```
+
+You can buid up options by calling functions
+
+```{r message=TRUE}
+"http://httpbin.org/get" %>%
+  Progress() %>%
+  Verbose()
+```
+
+Then eventually execute the GET request
+
+```{r message=TRUE}
+"http://httpbin.org/get" %>%
+  Progress() %>%
+  Verbose() %>%
+  Get()
 ```

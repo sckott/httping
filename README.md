@@ -9,9 +9,12 @@ httping
 
 ### Install
 
+One non-CRAN dep (`httpcode`) needs to be installed first.
+
 
 ```r
 install.packages("devtools")
+devtools::install_github("sckott/httpcode")
 devtools::install_github("sckott/httping")
 ```
 
@@ -27,13 +30,13 @@ A `GET` request
 
 ```r
 GET("http://google.com") %>% time(count=3)
-#> 31.304 kb - http://www.google.com/ code:200 time(ms):166.293
-#> 31.304 kb - http://www.google.com/ code:200 time(ms):171.972
-#> 31.304 kb - http://www.google.com/ code:200 time(ms):169.35
+#> 30.224 kb - http://www.google.com/ code:200 time(ms):215.837
+#> 29.688 kb - http://www.google.com/ code:200 time(ms):82.797
+#> 29.376 kb - http://www.google.com/ code:200 time(ms):85.405
 #> <http time>
-#>   Avg. min (ms):  166.293
-#>   Avg. max (ms):  171.972
-#>   Avg. mean (ms): 169.205
+#>   Avg. min (ms):  82.797
+#>   Avg. max (ms):  215.837
+#>   Avg. mean (ms): 128.013
 ```
 
 A `POST` request
@@ -41,13 +44,13 @@ A `POST` request
 
 ```r
 POST("http://httpbin.org/post", body = "A simple text string") %>% time(count=3)
-#> 10.704 kb - http://httpbin.org/post code:200 time(ms):880.296
-#> 10.704 kb - http://httpbin.org/post code:200 time(ms):96.534
-#> 10.704 kb - http://httpbin.org/post code:200 time(ms):101.717
+#> 10.144 kb - http://httpbin.org/post code:200 time(ms):329.959
+#> 10.144 kb - http://httpbin.org/post code:200 time(ms):97.647
+#> 10.144 kb - http://httpbin.org/post code:200 time(ms):96.763
 #> <http time>
-#>   Avg. min (ms):  96.534
-#>   Avg. max (ms):  880.296
-#>   Avg. mean (ms): 359.5157
+#>   Avg. min (ms):  96.763
+#>   Avg. max (ms):  329.959
+#>   Avg. mean (ms): 174.7897
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and 
@@ -56,9 +59,9 @@ the delay between requests are included as attributes.
 
 ```r
 res <- GET("http://google.com") %>% time(count=3)
-#> 31.304 kb - http://www.google.com/ code:200 time(ms):168.411
-#> 31.304 kb - http://www.google.com/ code:200 time(ms):178.557
-#> 31.304 kb - http://www.google.com/ code:200 time(ms):165.138
+#> 29.376 kb - http://www.google.com/ code:200 time(ms):84.232
+#> 29.376 kb - http://www.google.com/ code:200 time(ms):78.212
+#> 29.448 kb - http://www.google.com/ code:200 time(ms):85.3350000000001
 attributes(res)
 #> $names
 #> [1] "times"    "averages" "request" 
@@ -67,7 +70,7 @@ attributes(res)
 #> [1] 3
 #> 
 #> $delay
-#> [1] 1
+#> [1] 0.5
 #> 
 #> $class
 #> [1] "http_time"
@@ -79,12 +82,12 @@ Or print a summary of a response, gives more detail
 ```r
 res %>% summary()
 #> <http time, averages (min max mean)>
-#>   Total (s):           165.138 178.557 170.702
-#>   Tedirect (s):        47.861 52.284 49.37533
-#>   Namelookup time (s): 0.025 0.03 0.02766667
-#>   Connect (s):         0.028 0.034 0.03166667
-#>   Pretransfer (s):     0.081 0.091 0.086
-#>   Starttransfer (s):   70.145 81.738 77.61433
+#>   Total (s):           78.212 85.335 82.593
+#>   Tedirect (s):        27.899 27.975 27.94033
+#>   Namelookup time (s): 0.018 0.078 0.03866667
+#>   Connect (s):         0.02 0.088 0.04333333
+#>   Pretransfer (s):     0.051 0.329 0.147
+#>   Starttransfer (s):   42.949 52.026 48.60633
 ```
 
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like 
@@ -93,9 +96,9 @@ Messages are printed using `cat`, so you can suppress those using `verbose=FALSE
 ```r
 GET("http://google.com") %>% time(count=3, verbose = FALSE)
 #> <http time>
-#>   Avg. min (ms):  142.378
-#>   Avg. max (ms):  180.446
-#>   Avg. mean (ms): 156.5313
+#>   Avg. min (ms):  79.161
+#>   Avg. max (ms):  90.51
+#>   Avg. mean (ms): 83.034
 ```
 
 
@@ -119,4 +122,92 @@ Or pass in additional arguments to modify request
 #> <http ping> 200
 #>   Message: OK
 #>   Description: Request fulfilled, document follows
+```
+
+## Even simpler verbs
+
+Playing around with this idea. `httr` is already easy, but `Get()`:
+
+* Allows use of an intuitive chaining workflow
+* Parses data for you using `httr` built in format guesser, which should work in most cases
+
+A simple GET request
+
+
+```r
+"http://httpbin.org/get" %>%
+  Get()
+#> $args
+#> named list()
+#> 
+#> $headers
+#> $headers$Accept
+#> [1] "application/json, text/xml, application/xml, */*"
+#> 
+#> $headers$`Accept-Encoding`
+#> [1] "gzip"
+#> 
+#> $headers$Host
+#> [1] "httpbin.org"
+#> 
+#> $headers$`User-Agent`
+#> [1] "curl/7.37.1 Rcurl/1.95.4.5 httr/0.6.1"
+#> 
+#> 
+#> $origin
+#> [1] "24.21.209.71"
+#> 
+#> $url
+#> [1] "http://httpbin.org/get"
+```
+
+You can buid up options by calling functions
+
+
+```r
+"http://httpbin.org/get" %>%
+  Progress() %>%
+  Verbose()
+#> <http request> 
+#>   url: http://httpbin.org/get
+#>   config: 
+#> Config: 
+#> List of 4
+#>  $ noprogress      :FALSE
+#>  $ progressfunction:function (...)  
+#>  $ debugfunction   :function (...)  
+#>  $ verbose         :TRUE
+```
+
+Then eventually execute the GET request
+
+
+```r
+"http://httpbin.org/get" %>%
+  Progress() %>%
+  Verbose() %>%
+  Get()
+#>   |                                                                         |                                                                 |   0%  |                                                                         |=================================================================| 100%
+#> $args
+#> named list()
+#> 
+#> $headers
+#> $headers$Accept
+#> [1] "application/json, text/xml, application/xml, */*"
+#> 
+#> $headers$`Accept-Encoding`
+#> [1] "gzip"
+#> 
+#> $headers$Host
+#> [1] "httpbin.org"
+#> 
+#> $headers$`User-Agent`
+#> [1] "curl/7.37.1 Rcurl/1.95.4.5 httr/0.6.1"
+#> 
+#> 
+#> $origin
+#> [1] "24.21.209.71"
+#> 
+#> $url
+#> [1] "http://httpbin.org/get"
 ```
