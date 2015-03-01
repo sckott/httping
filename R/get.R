@@ -9,30 +9,51 @@
 #'  \item You most likely want a data.frame back, so we attempt to coerce to a data.frame
 #' }
 #' @examples \dontrun{
-#' "http://localhost:9200/gbif" %>%
+#' "https://api.github.com/" %>%
 #'    Get()
 #'
-#' "http://localhost:9200" %>%
+#' "https://api.github.com/" %>%
 #'    Progress() %>%
 #'    Verbose() %>%
 #'    Get()
 #'
-#' "http://localhost:9200" %>%
+#' "https://api.github.com/" %>%
 #'    Timeout(3) %>%
 #'    Get()
 #'
-#' "http://localhost:9200" %>%
-#'    User_agent("howdydoodie")
+#' "http://api.crossref.org/works/" %>%
+#'    User_agent("howdydoodie") %>%
+#'    Get()
+#'
+#' "http://api.plos.org/search?q=*:*&wt=json" %>%
+#'    Get() %>%
+#'    .$response %>%
+#'    .$docs
 #' }
 
 Get <- function(.data, ...)
 {
   .data <- as.request(.data)
-  hu <- httr:::handle_url(NULL, .data$url)
+  hu <- httr:::handle_url(NULL, .data$url, query=.data$query)
   res <- httr:::make_request("get", hu$handle, hu$url, .data$config)
   stop_for_status(res)
-  content(res)
-  # structure(list(status=res$status_code, request=res), class="http_ping")
+  if(grepl("json", res$headers$`content-type`)){
+    jsonlite::fromJSON(content(res, "text"))
+  } else {
+    content(res)
+  }
+}
+
+Put <- function(.data, ...)
+{
+  .data <- as.request(.data)
+  res <- PUT(.data$url, body = .data$body, ...)
+  stop_for_status(res)
+  if(grepl("json", res$headers$`content-type`)){
+    jsonlite::fromJSON(content(res, "text"))
+  } else {
+    content(res)
+  }
 }
 
 request <- function(.data){
