@@ -19,6 +19,7 @@ time <- function(.request, count=10, delay = 0.5, flood = FALSE, verbose=TRUE, .
   stopifnot(is(.request, "response"))
   if (flood) delay <- 0 else stopifnot(is(as.numeric(delay), "numeric"))
   if (verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(.request), .request$url, .request$status_code, .request$times[["total"]]*1000), sep = "\n")
+  if (count < 2) stop("count parameter must be greater than 1", call. = FALSE)
   if (count > 1) count_ <- count - 1
   reps <- replicate(count_, rerequest_(.request, delay, verbose), simplify = FALSE)
   all <- do.call(c, list(list(.request), reps))
