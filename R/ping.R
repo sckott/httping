@@ -6,7 +6,7 @@
 #' @param verb An http verb, default: \code{\link[httr]{GET}}
 #' @param ... Any httr verb parameters passed on to those functions
 #' @details not sure this function is worth having, doesn't do a whole lot...
-#' @examples \donttest{
+#' @examples \dontrun{
 #' "http://httpbin.org/get" %>% ping()
 #' "http://httpbin.org/get" %>% ping(config=verbose())
 #' "http://httpbin.org/get" %>% ping(config=c(verbose(), accept_json()))

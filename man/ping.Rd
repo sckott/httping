@@ -20,7 +20,7 @@ Ping a url, doing a single call, with any http verbs
 not sure this function is worth having, doesn't do a whole lot...
 }
 \examples{
-\donttest{
+\dontrun{
 "http://httpbin.org/get" \%>\% ping()
 "http://httpbin.org/get" \%>\% ping(config=verbose())
 "http://httpbin.org/get" \%>\% ping(config=c(verbose(), accept_json()))

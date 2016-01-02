@@ -25,7 +25,7 @@ second.}
 Ping a url to time the request
 }
 \examples{
-\donttest{
+\dontrun{
 GET("http://httpbin.org/get") \%>\% time()
 GET("https://api.github.com") \%>\% time()
 GET("http://google.com") \%>\% time()
