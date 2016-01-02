@@ -1,9 +1,6 @@
 #' Ping a url to time the request
 #'
 #' @export
-#' @import httr
-#' @importFrom jsonlite fromJSON
-#' @importFrom pryr object_size
 #'
 #' @param .request A httr response object
 #' @param count integer, Number of requests to do.
@@ -13,17 +10,16 @@
 #' @param verbose logical; If TRUE, print progress.
 #' @param ... Further args passed on to functions in \code{httr}
 #' @examples \donttest{
-#' GET("http://localhost:9200") %>% time()
-#' GET("http://localhost:5984") %>% time()
+#' GET("http://httpbin.org/get") %>% time()
+#' GET("https://api.github.com") %>% time()
 #' GET("http://google.com") %>% time()
 #' }
 
-time <- function(.request, count=10, delay = 0.5, flood = FALSE, verbose=TRUE, ...)
-{
+time <- function(.request, count=10, delay = 0.5, flood = FALSE, verbose=TRUE, ...) {
   stopifnot(is(.request, "response"))
-  if(flood) delay <- 0 else stopifnot(is(as.numeric(delay), "numeric"))
-  if(verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(.request), .request$url, .request$status_code, .request$times[["total"]]*1000), sep = "\n")
-  if(count > 1) count_ <- count - 1
+  if (flood) delay <- 0 else stopifnot(is(as.numeric(delay), "numeric"))
+  if (verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(.request), .request$url, .request$status_code, .request$times[["total"]]*1000), sep = "\n")
+  if (count > 1) count_ <- count - 1
   reps <- replicate(count_, rerequest_(.request, delay, verbose), simplify = FALSE)
   all <- do.call(c, list(list(.request), reps))
   times <- pluck(all, "times")
@@ -32,10 +28,10 @@ time <- function(.request, count=10, delay = 0.5, flood = FALSE, verbose=TRUE, .
     tt <- pluck(times, z, double(1))
     setNames(sapply(list(min, max, mean), function(x) calc(tt, x)), c("min","max","mean"))
   }), nmz)
-  structure(list(times=times, averages=avgs, request=.request),
+  structure(list(times = times, averages = avgs, request = .request),
             count = count,
             delay = delay,
-            class="http_time")
+            class = "http_time")
 }
 
 calc <- function(x, fxn) format(fxn(x*1000, na.rm = TRUE), scientific = FALSE)
@@ -43,7 +39,7 @@ calc <- function(x, fxn) format(fxn(x*1000, na.rm = TRUE), scientific = FALSE)
 rerequest_ <- function(x, delay, verbose=TRUE){
   Sys.sleep(delay)
   tmp <- rerequest(x)
-  if(verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(tmp), tmp$url, tmp$status_code, tmp$times[["total"]]*1000), sep = "\n")
+  if (verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(tmp), tmp$url, tmp$status_code, tmp$times[["total"]]*1000), sep = "\n")
   return(tmp)
 }
 

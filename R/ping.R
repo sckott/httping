@@ -1,19 +1,19 @@
 #' Ping a url, doing a single call, with any http verbs
 #'
 #' @export
-#' @importFrom httpcode http_code
+#'
 #' @param url A url
 #' @param verb An http verb, default: \code{\link[httr]{GET}}
 #' @param ... Any httr verb parameters passed on to those functions
 #' @details not sure this function is worth having, doesn't do a whole lot...
 #' @examples \donttest{
-#' "http://localhost:9200" %>% ping()
-#' "http://localhost:9200" %>% ping(config=verbose())
-#' "http://localhost:9200" %>% ping(config=c(verbose(), accept_json()))
+#' "http://httpbin.org/get" %>% ping()
+#' "http://httpbin.org/get" %>% ping(config=verbose())
+#' "http://httpbin.org/get" %>% ping(config=c(verbose(), accept_json()))
 #'
-#' "http://localhost:5984" %>% ping()
-#' "http://localhost:5984" %>% ping(verb=HEAD)
-#' "http://localhost:5984" %>% ping(verb=PUT)
+#' "http://httpbin.org/get" %>% ping()
+#' "http://httpbin.org/get" %>% ping(verb=HEAD)
+#' "http://httpbin.org/get" %>% ping(verb=PUT)
 #' "http://google.com" %>% ping()
 #'
 #' # pass just a port number, tries to resolve, fails if not found
@@ -21,15 +21,13 @@
 #' 9200 %>% ping()
 #' 9200 %>% ping(verb=POST)
 #' 9200 %>% ping(verb=HEAD)
-#' 5984 %>% ping()
 #' ping(9200)
 #' ping("9200")
 #' }
 
-ping <- function(url, verb=GET, ...)
-{
+ping <- function(url, verb=GET, ...) {
   res <- verb(as.url(url)[[1]], ...)
-  structure(list(status=res$status_code, request=res), class="http_ping")
+  structure(list(status = res$status_code, request = res), class = "http_ping")
 }
 
 #' @export
@@ -42,14 +40,15 @@ print.http_ping <- function(x, ...){
 
 as.url <- function(x) UseMethod("as.url")
 as.url.url <- function(x) x
-as.url.character <- function(x){
-  if( is_url(x) )
+as.url.character <- function(x) {
+  if ( is_url(x) ) {
     x <- add_http(x)
-  else if( is_port(x) )
+  } else if ( is_port(x) ) {
     x <- paste0("http://localhost:", x)
-  else
+  } else {
     stop("url or port not detected", call. = FALSE)
-  structure(x, class="url")
+  }
+  structure(x, class = "url")
 }
 as.url.numeric <- function(x) as.url(as.character(x))
 
@@ -60,5 +59,5 @@ is_url <- function(x){
 is_port <- function(x) grepl("[[:digit:]]", x) && nchar(x) == 4
 
 add_http <- function(x){
-  if( !grepl("http://", x, ignore.case = TRUE) ) paste0("http://", x) else x
+  if ( !grepl("http://", x, ignore.case = TRUE) ) paste0("http://", x) else x
 }
