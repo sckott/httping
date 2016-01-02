@@ -30,12 +30,12 @@ ping("http://httpbin.org/get", config=verbose())
 "http://google.com" \%>\% ping()
 
 # pass just a port number, tries to resolve, fails if not found
-"9200" \%>\% ping()
-9200 \%>\% ping()
-9200 \%>\% ping(verb=POST)
-9200 \%>\% ping(verb=HEAD)
-ping(9200)
-ping("9200")
+# "9200" \%>\% ping()
+# 9200 \%>\% ping()
+# 9200 \%>\% ping(verb=POST)
+# 9200 \%>\% ping(verb=HEAD)
+# ping(9200)
+# ping("9200")
 }
 }
 
