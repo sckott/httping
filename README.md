@@ -5,6 +5,7 @@ httping
 
 [![Build Status](https://travis-ci.org/sckott/httping.svg)](https://travis-ci.org/sckott/httping)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/httping)](http://cran.rstudio.com/web/packages/httping)
 
 `httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
 
