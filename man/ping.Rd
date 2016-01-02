@@ -9,20 +9,19 @@ ping(url, verb = GET, ...)
 \arguments{
 \item{url}{A url}
 
-\item{verb}{An http verb, default: \code{\link[httr]{GET}}}
+\item{verb}{(character) An http verb, default: \code{\link[httr]{GET}}}
 
-\item{...}{Any httr verb parameters passed on to those functions}
+\item{...}{Any \code{httr} verb parameters passed on to those functions}
 }
 \description{
 Ping a url, doing a single call, with any http verbs
 }
-\details{
-not sure this function is worth having, doesn't do a whole lot...
-}
 \examples{
 \dontrun{
 "http://httpbin.org/get" \%>\% ping()
+ping("http://httpbin.org/get")
 "http://httpbin.org/get" \%>\% ping(config=verbose())
+ping("http://httpbin.org/get", config=verbose())
 "http://httpbin.org/get" \%>\% ping(config=c(verbose(), accept_json()))
 
 "http://httpbin.org/get" \%>\% ping()

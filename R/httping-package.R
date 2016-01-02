@@ -1,6 +1,8 @@
 #' Ping urls to time requests
 #'
 #' @import httr
+#' @importFrom methods is
+#' @importFrom stats setNames
 #' @importFrom jsonlite fromJSON
 #' @importFrom pryr object_size
 #' @importFrom httpcode http_code
