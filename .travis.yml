@@ -1,8 +1,5 @@
 language: r
 
-r_github_packages:
-  - sckott/httpcode
-
 notifications:
   email:
     on_success: change
