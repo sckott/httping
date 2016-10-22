@@ -5,7 +5,7 @@ httping
 
 [![Build Status](https://travis-ci.org/sckott/httping.svg)](https://travis-ci.org/sckott/httping)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/httping)](http://cran.rstudio.com/web/packages/httping)
+[![cran version](http://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
 
 `httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
 
@@ -38,13 +38,13 @@ A `GET` request
 
 ```r
 GET("http://google.com") %>% time(count = 3)
-#> 29.624 kb - http://www.google.com/ code:200 time(ms):660.898
-#> 28.984 kb - http://www.google.com/ code:200 time(ms):73.717
-#> 28.984 kb - http://www.google.com/ code:200 time(ms):75.73
+#> 20.968 kb - http://www.google.com/ code:200 time(ms):165.488
+#> 20.328 kb - http://www.google.com/ code:200 time(ms):138.537
+#> 20.328 kb - http://www.google.com/ code:200 time(ms):119.707
 #> <http time>
-#>   Avg. min (ms):  73.717
-#>   Avg. max (ms):  660.898
-#>   Avg. mean (ms): 270.115
+#>   Avg. min (ms):  119.707
+#>   Avg. max (ms):  165.488
+#>   Avg. mean (ms): 141.244
 ```
 
 A `POST` request
@@ -52,13 +52,13 @@ A `POST` request
 
 ```r
 POST("http://httpbin.org/post", body = "A simple text string") %>% time(count = 3)
-#> 8.488 kb - http://httpbin.org/post code:200 time(ms):219.859
-#> 8.488 kb - http://httpbin.org/post code:200 time(ms):93.761
-#> 8.488 kb - http://httpbin.org/post code:200 time(ms):92.706
+#> 8.4 kb - http://httpbin.org/post code:200 time(ms):191.328
+#> 8.4 kb - http://httpbin.org/post code:200 time(ms):191.521
+#> 8.4 kb - http://httpbin.org/post code:200 time(ms):188.669
 #> <http time>
-#>   Avg. min (ms):  92.706
-#>   Avg. max (ms):  219.859
-#>   Avg. mean (ms): 135.442
+#>   Avg. min (ms):  188.669
+#>   Avg. max (ms):  191.521
+#>   Avg. mean (ms): 190.506
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and
@@ -67,9 +67,9 @@ the delay between requests are included as attributes.
 
 ```r
 res <- GET("http://google.com") %>% time(count = 3)
-#> 28.984 kb - http://www.google.com/ code:200 time(ms):69.516
-#> 29.056 kb - http://www.google.com/ code:200 time(ms):72.893
-#> 28.984 kb - http://www.google.com/ code:200 time(ms):71.068
+#> 20.4 kb - http://www.google.com/ code:200 time(ms):130.381
+#> 20.328 kb - http://www.google.com/ code:200 time(ms):135.819
+#> 20.328 kb - http://www.google.com/ code:200 time(ms):123.088
 attributes(res)
 #> $names
 #> [1] "times"    "averages" "request" 
@@ -90,12 +90,12 @@ Or print a summary of a response, gives more detail
 ```r
 res %>% summary()
 #> <http time, averages (min max mean)>
-#>   Total (s):           69.516 72.893 71.159
-#>   Tedirect (s):        23.814 28.667 26.19467
-#>   Namelookup time (s): 0.033 0.035 0.03366667
-#>   Connect (s):         0.036 0.038 0.03666667
-#>   Pretransfer (s):     0.078 0.086 0.082
-#>   Starttransfer (s):   42.021 46.425 44.635
+#>   Total (s):           123.088 135.819 129.7627
+#>   Tedirect (s):        41.308 52.6 48.22167
+#>   Namelookup time (s): 1.284 1.713 1.492
+#>   Connect (s):         1.613 2.1 1.840333
+#>   Pretransfer (s):     1.701 2.169 1.921333
+#>   Starttransfer (s):   79.285 82.345 80.802
 ```
 
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like
@@ -104,9 +104,9 @@ Messages are printed using `cat`, so you can suppress those using `verbose=FALSE
 ```r
 GET("http://google.com") %>% time(count = 3, verbose = FALSE)
 #> <http time>
-#>   Avg. min (ms):  67.127
-#>   Avg. max (ms):  80.106
-#>   Avg. mean (ms): 71.80267
+#>   Avg. min (ms):  118.542
+#>   Avg. max (ms):  131.147
+#>   Avg. mean (ms): 124.429
 ```
 
 
