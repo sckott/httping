@@ -18,16 +18,16 @@ Ping a url, doing a single call, with any http verbs
 }
 \examples{
 \dontrun{
-"http://httpbin.org/get" \%>\% ping()
-ping("http://httpbin.org/get")
-"http://httpbin.org/get" \%>\% ping(config=verbose())
-ping("http://httpbin.org/get", config=verbose())
-"http://httpbin.org/get" \%>\% ping(config=c(verbose(), accept_json()))
+"https://httpbin.org/get" \%>\% ping()
+ping("https://httpbin.org/get")
+"https://httpbin.org/get" \%>\% ping(config=verbose())
+ping("https://httpbin.org/get", config=verbose())
+"https://httpbin.org/get" \%>\% ping(config=c(verbose(), accept_json()))
 
-"http://httpbin.org/get" \%>\% ping()
-"http://httpbin.org/get" \%>\% ping(verb=HEAD)
-"http://httpbin.org/get" \%>\% ping(verb=PUT)
-"http://google.com" \%>\% ping()
+"https://httpbin.org/get" \%>\% ping()
+"https://httpbin.org/get" \%>\% ping(verb=HEAD)
+"https://httpbin.org/get" \%>\% ping(verb=PUT)
+"https://google.com" \%>\% ping()
 
 # pass just a port number, tries to resolve, fails if not found
 # "9200" \%>\% ping()

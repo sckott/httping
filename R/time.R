@@ -10,7 +10,7 @@
 #' @param verbose logical; If TRUE, print progress.
 #' @param ... Further args passed on to functions in \code{httr}
 #' @examples \dontrun{
-#' GET("http://httpbin.org/get") %>% time()
+#' GET("https://httpbin.org/get") %>% time()
 #' GET("https://api.github.com") %>% time()
 #' GET("http://google.com") %>% time()
 #' }

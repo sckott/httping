@@ -5,7 +5,6 @@
 #' @importFrom stats setNames
 #' @importFrom jsonlite fromJSON
 #' @importFrom pryr object_size
-#' @importFrom httpcode http_code
 #' @name httping-package
 #' @aliases httping
 #' @docType package
