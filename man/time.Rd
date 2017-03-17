@@ -31,4 +31,3 @@ GET("https://api.github.com") \%>\% time()
 GET("http://google.com") \%>\% time()
 }
 }
-

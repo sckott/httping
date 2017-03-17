@@ -12,12 +12,26 @@ test_that("ping works", {
   expect_is(aa1, "http_ping")
   expect_is(aa2, "http_ping")
   expect_named(aa1$request$request$options, c('useragent', 'httpget'))
-  expect_identical(aa1$request$content, aa2$request$content)
+
+  aa1req <- httr::content(aa1$request)
+  aa1req$headers$`Connect-Time` <- NULL
+  aa1req$headers$`X-Request-Id` <- NULL
+  aa2req <- httr::content(aa2$request)
+  aa2req$headers$`Connect-Time` <- NULL
+  aa2req$headers$`X-Request-Id` <- NULL
+  expect_identical(aa1req, aa2req)
 
   expect_is(bb1, "http_ping")
   expect_is(bb2, "http_ping")
   expect_named(bb1$request$request$options, c('useragent', 'timeout_ms', 'httpget'))
-  expect_identical(bb1$request$content, bb2$request$content)
+
+  bb1req <- httr::content(bb1$request)
+  bb1req$headers$`Connect-Time` <- NULL
+  bb1req$headers$`X-Request-Id` <- NULL
+  bb2req <- httr::content(bb2$request)
+  bb2req$headers$`Connect-Time` <- NULL
+  bb2req$headers$`X-Request-Id` <- NULL
+  expect_identical(bb1req, bb2req)
 })
 
 test_that("ping - different HTTP verbse work", {

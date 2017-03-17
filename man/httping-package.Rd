@@ -2,8 +2,8 @@
 % Please edit documentation in R/httping-package.R
 \docType{package}
 \name{httping-package}
-\alias{httping}
 \alias{httping-package}
+\alias{httping}
 \title{Ping urls to time requests}
 \description{
 Ping urls to time requests
@@ -13,8 +13,8 @@ Ping urls to time requests
 You can use this function with or without pipes. We export the pipe
 \code{\%>\%} in this package so you don't have to load it separately.
 }
+
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 \keyword{package}
-
