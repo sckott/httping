@@ -6,15 +6,15 @@
 #' @param verb (character) An http verb, default: [httr::GET()]
 #' @param ... Any \pkg{httr} verb parameters passed on to those functions
 #' @examples \dontrun{
-#' "https://httpbin.org/get" %>% ping()
-#' ping("https://httpbin.org/get")
-#' "https://httpbin.org/get" %>% ping(config=verbose())
-#' ping("https://httpbin.org/get", config=verbose())
-#' "https://httpbin.org/get" %>% ping(config=c(verbose(), accept_json()))
+#' "https://mockbin.com/request" %>% ping()
+#' ping("https://mockbin.com/request")
+#' "https://mockbin.com/request" %>% ping(config=verbose())
+#' ping("https://mockbin.com/request", config=verbose())
+#' "https://mockbin.com/request" %>% ping(config=c(verbose(), accept_json()))
 #'
-#' "https://httpbin.org/get" %>% ping()
-#' "https://httpbin.org/get" %>% ping(verb=HEAD)
-#' "https://httpbin.org/get" %>% ping(verb=PUT)
+#' "https://mockbin.com/request" %>% ping()
+#' "https://mockbin.com/request" %>% ping(verb=HEAD)
+#' "https://mockbin.com/request" %>% ping(verb=PUT)
 #' "https://google.com" %>% ping()
 #'
 #' # pass just a port number, tries to resolve, fails if not found

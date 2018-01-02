@@ -12,7 +12,7 @@
 #' @param verbose logical; If `TRUE`, print progress.
 #' @param ... Further args passed on to functions in \pkg{httr}
 #' @examples \dontrun{
-#' GET("https://httpbin.org/get") %>% time()
+#' GET("https://mockbin.com/request") %>% time()
 #' GET("https://api.github.com") %>% time()
 #' GET("http://google.com") %>% time()
 #' }

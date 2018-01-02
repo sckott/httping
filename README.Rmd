@@ -40,13 +40,13 @@ library("httping")
 A `GET` request
 
 ```{r}
-GET("http://google.com") %>% time(count = 3)
+GET("https://google.com") %>% time(count = 3)
 ```
 
 A `POST` request
 
 ```{r}
-POST("http://httpbin.org/post", body = "A simple text string") %>% time(count = 3)
+POST("https://mockbin.com/request", body = "A simple text string") %>% time(count = 3)
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and
@@ -66,7 +66,7 @@ res %>% summary()
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like
 
 ```{r}
-GET("http://google.com") %>% time(count = 3, verbose = FALSE)
+GET("https://google.com") %>% time(count = 3, verbose = FALSE)
 ```
 
 
@@ -75,13 +75,13 @@ GET("http://google.com") %>% time(count = 3, verbose = FALSE)
 This function is a bit different, accepts a url as first parameter, but can accept any args passed on to `httr` verb functions, like `GET`, `POST`,  etc.
 
 ```{r}
-"http://google.com" %>% ping()
+"https://google.com" %>% ping()
 ```
 
 Or pass in additional arguments to modify request
 
 ```{r}
-"http://google.com" %>% ping(config = verbose())
+"https://google.com" %>% ping(config = verbose())
 ```
 
 ## Meta
