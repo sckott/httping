@@ -9,9 +9,9 @@ ping(url, verb = GET, ...)
 \arguments{
 \item{url}{A url}
 
-\item{verb}{(character) An http verb, default: \code{\link[httr]{GET}}}
+\item{verb}{(character) An http verb, default: \code{\link[httr:GET]{httr::GET()}}}
 
-\item{...}{Any \code{httr} verb parameters passed on to those functions}
+\item{...}{Any \pkg{httr} verb parameters passed on to those functions}
 }
 \description{
 Ping a url, doing a single call, with any http verbs

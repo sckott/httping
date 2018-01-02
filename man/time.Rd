@@ -8,18 +8,20 @@ time(.request, count = 10, delay = 0.5, flood = FALSE, verbose = TRUE,
   ...)
 }
 \arguments{
-\item{.request}{A httr response object}
+\item{.request}{A \pkg{httr} response object}
 
 \item{count}{integer, Number of requests to do.}
 
-\item{delay}{integer, Seconds to delay successive calls by. Default: 0.5 seconds.}
+\item{delay}{integer, Seconds to delay successive calls by. Default:
+0.5 seconds.}
 
-\item{flood}{logical; If TRUE, no delay between requests. If FALSE, delay by 0.5
+\item{flood}{logical; If \code{TRUE}, no delay between requests. If \code{FALSE},
+delay by 0.5
 second.}
 
-\item{verbose}{logical; If TRUE, print progress.}
+\item{verbose}{logical; If \code{TRUE}, print progress.}
 
-\item{...}{Further args passed on to functions in \code{httr}}
+\item{...}{Further args passed on to functions in \pkg{httr}}
 }
 \description{
 Ping a url to time the request

@@ -3,8 +3,8 @@
 #' @export
 #'
 #' @param url A url
-#' @param verb (character) An http verb, default: \code{\link[httr]{GET}}
-#' @param ... Any \code{httr} verb parameters passed on to those functions
+#' @param verb (character) An http verb, default: [httr::GET()]
+#' @param ... Any \pkg{httr} verb parameters passed on to those functions
 #' @examples \dontrun{
 #' "https://httpbin.org/get" %>% ping()
 #' ping("https://httpbin.org/get")

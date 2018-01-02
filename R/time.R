@@ -2,13 +2,15 @@
 #'
 #' @export
 #'
-#' @param .request A httr response object
+#' @param .request A \pkg{httr} response object
 #' @param count integer, Number of requests to do.
-#' @param delay integer, Seconds to delay successive calls by. Default: 0.5 seconds.
-#' @param flood logical; If TRUE, no delay between requests. If FALSE, delay by 0.5
+#' @param delay integer, Seconds to delay successive calls by. Default: 
+#' 0.5 seconds.
+#' @param flood logical; If `TRUE`, no delay between requests. If `FALSE`,
+#' delay by 0.5
 #' second.
-#' @param verbose logical; If TRUE, print progress.
-#' @param ... Further args passed on to functions in \code{httr}
+#' @param verbose logical; If `TRUE`, print progress.
+#' @param ... Further args passed on to functions in \pkg{httr}
 #' @examples \dontrun{
 #' GET("https://httpbin.org/get") %>% time()
 #' GET("https://api.github.com") %>% time()
