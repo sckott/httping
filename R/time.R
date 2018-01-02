@@ -18,9 +18,20 @@
 #' }
 
 time <- function(.request, count=10, delay = 0.5, flood = FALSE, verbose=TRUE, ...) {
-  stopifnot(is(.request, "response"))
+  xxx
+}
+
+time_ <- function(x) UseMethod("time")
+time_.default <- function(x) {
+  stop("no 'time' method for ", class(x)[[1L]])
+}
+time_.
+
+time_ <- function(.request, count=10, delay = 0.5, flood = FALSE, verbose=TRUE, ...) {
+  stopifnot(inherits(.request, "response"))
   if (flood) delay <- 0 else stopifnot(is(as.numeric(delay), "numeric"))
-  if (verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(.request), .request$url, .request$status_code, .request$times[["total"]]*1000), sep = "\n")
+  if (verbose) cat(sprintf("%s kb - %s code:%s time(ms):%s", get_kb(.request), 
+    .request$url, .request$status_code, .request$times[["total"]]*1000), sep = "\n")
   if (count < 2) stop("count parameter must be greater than 1", call. = FALSE)
   if (count > 1) count_ <- count - 1
   reps <- replicate(count_, rerequest_(.request, delay, verbose), simplify = FALSE)
