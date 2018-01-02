@@ -2,7 +2,7 @@ Package: httping
 Title: 'Ping' 'URLs' to Time 'Requests'
 Description: A suite of functions to ping 'URLs' and to time
     'HTTP' 'requests'. Designed to work with 'httr'.
-Version: 0.1.8.9100
+Version: 0.2.0
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
