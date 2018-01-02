@@ -38,13 +38,13 @@ A `GET` request
 
 ```r
 GET("https://google.com") %>% time(count = 3)
-#> 22.464 kb - https://www.google.com/ code:200 time(ms):216.152
-#> 21.96 kb - https://www.google.com/ code:200 time(ms):153.489
-#> 21.96 kb - https://www.google.com/ code:200 time(ms):141.658
+#> 22.464 kb - https://www.google.com/ code:200 time(ms):204.716
+#> 21.96 kb - https://www.google.com/ code:200 time(ms):134.303
+#> 21.96 kb - https://www.google.com/ code:200 time(ms):118.564
 #> <http time>
-#>   Avg. min (ms):  141.658
-#>   Avg. max (ms):  216.152
-#>   Avg. mean (ms): 170.433
+#>   Avg. min (ms):  118.564
+#>   Avg. max (ms):  204.716
+#>   Avg. mean (ms): 152.5277
 ```
 
 A `POST` request
@@ -52,13 +52,13 @@ A `POST` request
 
 ```r
 POST("https://mockbin.com/request", body = "A simple text string") %>% time(count = 3)
-#> 10.976 kb - https://mockbin.com/request code:200 time(ms):329.016
-#> 10.832 kb - https://mockbin.com/request code:200 time(ms):116.216
-#> 10.832 kb - https://mockbin.com/request code:200 time(ms):196.786
+#> 10.976 kb - https://mockbin.com/request code:200 time(ms):344.269
+#> 10.832 kb - https://mockbin.com/request code:200 time(ms):194.178
+#> 10.832 kb - https://mockbin.com/request code:200 time(ms):110.234
 #> <http time>
-#>   Avg. min (ms):  116.216
-#>   Avg. max (ms):  329.016
-#>   Avg. mean (ms): 214.006
+#>   Avg. min (ms):  110.234
+#>   Avg. max (ms):  344.269
+#>   Avg. mean (ms): 216.227
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and
@@ -67,9 +67,9 @@ the delay between requests are included as attributes.
 
 ```r
 res <- GET("http://google.com") %>% time(count = 3)
-#> 22.136 kb - http://www.google.com/ code:200 time(ms):91.47
-#> 21.632 kb - http://www.google.com/ code:200 time(ms):69.406
-#> 21.632 kb - http://www.google.com/ code:200 time(ms):66.625
+#> 22.064 kb - http://www.google.com/ code:200 time(ms):87.641
+#> 21.56 kb - http://www.google.com/ code:200 time(ms):77.876
+#> 21.56 kb - http://www.google.com/ code:200 time(ms):69.833
 attributes(res)
 #> $names
 #> [1] "times"    "averages" "request" 
@@ -90,12 +90,12 @@ Or print a summary of a response, gives more detail
 ```r
 res %>% summary()
 #> <http time, averages (min max mean)>
-#>   Total (s):           66.625 91.47 75.83367
-#>   Tedirect (s):        20.036 35.533 25.32933
-#>   Namelookup time (s): 0.046 1.079 0.4013333
-#>   Connect (s):         0.049 10.52 3.551333
-#>   Pretransfer (s):     0.126 10.599 3.660333
-#>   Starttransfer (s):   45.747 55.343 49.967
+#>   Total (s):           69.833 87.641 78.45
+#>   Tedirect (s):        19.933 31.125 23.906
+#>   Namelookup time (s): 0.05 1.884 0.6616667
+#>   Connect (s):         0.054 11.052 3.72
+#>   Pretransfer (s):     0.14 11.174 3.826
+#>   Starttransfer (s):   48.783 57.503 54.06467
 ```
 
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like
@@ -104,9 +104,9 @@ Messages are printed using `cat`, so you can suppress those using `verbose=FALSE
 ```r
 GET("https://google.com") %>% time(count = 3, verbose = FALSE)
 #> <http time>
-#>   Avg. min (ms):  126.641
-#>   Avg. max (ms):  145.122
-#>   Avg. mean (ms): 134.8897
+#>   Avg. min (ms):  113.94
+#>   Avg. max (ms):  135.96
+#>   Avg. mean (ms): 128.36
 ```
 
 
@@ -134,4 +134,4 @@ Or pass in additional arguments to modify request
 
 ## Meta
 
-* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

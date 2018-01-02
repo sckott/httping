@@ -2,6 +2,6 @@
 ^\.Rproj\.user$
 README.Rmd
 .travis.yml
-^CONDUCT\.md$
+^CODE_OF_CONDUCT\.md$
 ^NEWS\.md$
 ^cran-comments\.md$
