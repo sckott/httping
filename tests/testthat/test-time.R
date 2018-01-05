@@ -5,7 +5,7 @@ test_that("time works", {
 
   aa <- GET("https://mockbin.com/request") %>% time(verbose = FALSE)
   bb <- GET("https://api.github.com/") %>% time(verbose = FALSE)
-  cc <- GET("https://google.com/") %>% time(verbose = FALSE)
+
 
   expect_is(aa, "http_time")
   expect_is(aa$times, "list")
@@ -18,12 +18,6 @@ test_that("time works", {
   expect_is(bb$averages, "list")
   expect_is(bb$request, "response")
   expect_equal(bb$request$url, "https://api.github.com/")
-
-  expect_is(cc, "http_time")
-  expect_is(cc$times, "list")
-  expect_is(cc$averages, "list")
-  expect_is(cc$request, "response")
-  expect_equal(cc$request$url, "https://www.google.com/")
 })
 
 test_that("time - count parameter works", {
