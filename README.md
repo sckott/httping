@@ -2,7 +2,7 @@ httping
 =======
 
 
-
+[![cran checks](https://cranchecks.info/badges/worst/httping)](https://cranchecks.info/pkgs/httping)
 [![Build Status](https://travis-ci.org/sckott/httping.svg)](https://travis-ci.org/sckott/httping)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
 [![cran version](http://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
