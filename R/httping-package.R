@@ -10,7 +10,7 @@
 #' @name httping-package
 #' @aliases httping
 #' @docType package
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+#' @author Scott Chamberlain
 #' @keywords package
 #'
 #' @section Pipes:

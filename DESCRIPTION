@@ -2,23 +2,23 @@ Package: httping
 Title: 'Ping' 'URLs' to Time 'Requests'
 Description: A suite of functions to ping 'URLs' and to time
     'HTTP' 'requests'. Designed to work with 'httr'.
-Version: 0.2.0.9100
+Version: 0.2.9.91
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 License: MIT + file LICENSE
 URL: https://github.com/sckott/httping
 BugReports: https://github.com/sckott/httping/issues
 Roxygen: list(markdown = TRUE)
-Depends:
-    httr (>= 1.3.1)
+Encoding: UTF-8
+Language: en-US
 Imports:
+    httr (>= 1.3.1),
     methods,
     stats,
-    jsonlite (>= 1.5),
+    jsonlite,
     pryr (>= 0.1.3),
     magrittr,
     httpcode (>= 0.2.0)
 Suggests:
-    roxygen2 (>= 6.0.1),
     testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 7.2.1

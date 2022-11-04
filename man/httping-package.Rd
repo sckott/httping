@@ -15,6 +15,6 @@ You can use this function with or without pipes. We export the pipe
 }
 
 \author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
+Scott Chamberlain
 }
 \keyword{package}

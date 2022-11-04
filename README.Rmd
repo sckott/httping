@@ -10,10 +10,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![cran checks](https://cranchecks.info/badges/worst/httping)](https://cranchecks.info/pkgs/httping)
-[![Build Status](https://travis-ci.org/sckott/httping.svg)](https://travis-ci.org/sckott/httping)
+[![cran checks](https://badges.cranchecks.info/worst/httping.svg)](https://cloud.r-project.org/web/checks/check_results_httping.html)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
+[![cran version](https://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
 
 `httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
 
@@ -28,12 +27,13 @@ install.packages("httping")
 Development version from Github
 
 ```{r eval=FALSE}
-install.packages("devtools")
-devtools::install_github("sckott/httping")
+install.packages("pak")
+pak::pkg_install("sckott/httping")
 ```
 
 ```{r}
 library("httping")
+library("httr")
 ```
 
 ## Pass any httr request to time

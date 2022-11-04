@@ -2,10 +2,10 @@ httping
 =======
 
 
-[![cran checks](https://cranchecks.info/badges/worst/httping)](https://cranchecks.info/pkgs/httping)
-[![Build Status](https://travis-ci.org/sckott/httping.svg)](https://travis-ci.org/sckott/httping)
+
+[![cran checks](https://badges.cranchecks.info/worst/httping.svg)](https://cloud.r-project.org/web/checks/check_results_httping.html)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
+[![cran version](https://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
 
 `httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
 
@@ -22,13 +22,14 @@ Development version from Github
 
 
 ```r
-install.packages("devtools")
-devtools::install_github("sckott/httping")
+install.packages("pak")
+pak::pkg_install("sckott/httping")
 ```
 
 
 ```r
 library("httping")
+library("httr")
 ```
 
 ## Pass any httr request to time
@@ -38,13 +39,13 @@ A `GET` request
 
 ```r
 GET("https://google.com") %>% time(count = 3)
-#> 22.464 kb - https://www.google.com/ code:200 time(ms):204.716
-#> 21.96 kb - https://www.google.com/ code:200 time(ms):134.303
-#> 21.96 kb - https://www.google.com/ code:200 time(ms):118.564
+#> 28.968 kb - https://www.google.com/ code:200 time(ms):211.388
+#> 28.704 kb - https://www.google.com/ code:200 time(ms):100.809
+#> 28.104 kb - https://www.google.com/ code:200 time(ms):103.847
 #> <http time>
-#>   Avg. min (ms):  118.564
-#>   Avg. max (ms):  204.716
-#>   Avg. mean (ms): 152.5277
+#>   Avg. min (ms):  100.809
+#>   Avg. max (ms):  211.388
+#>   Avg. mean (ms): 138.6813
 ```
 
 A `POST` request
@@ -52,13 +53,13 @@ A `POST` request
 
 ```r
 POST("https://mockbin.com/request", body = "A simple text string") %>% time(count = 3)
-#> 10.976 kb - https://mockbin.com/request code:200 time(ms):344.269
-#> 10.832 kb - https://mockbin.com/request code:200 time(ms):194.178
-#> 10.832 kb - https://mockbin.com/request code:200 time(ms):110.234
+#> 12.8 kb - https://mockbin.com/request code:200 time(ms):237.003
+#> 12.8 kb - https://mockbin.com/request code:200 time(ms):194.054
+#> 12.8 kb - https://mockbin.com/request code:200 time(ms):202.133
 #> <http time>
-#>   Avg. min (ms):  110.234
-#>   Avg. max (ms):  344.269
-#>   Avg. mean (ms): 216.227
+#>   Avg. min (ms):  194.054
+#>   Avg. max (ms):  237.003
+#>   Avg. mean (ms): 211.0633
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and
@@ -67,9 +68,9 @@ the delay between requests are included as attributes.
 
 ```r
 res <- GET("http://google.com") %>% time(count = 3)
-#> 22.064 kb - http://www.google.com/ code:200 time(ms):87.641
-#> 21.56 kb - http://www.google.com/ code:200 time(ms):77.876
-#> 21.56 kb - http://www.google.com/ code:200 time(ms):69.833
+#> 28.08 kb - http://www.google.com/ code:200 time(ms):135.897
+#> 27.488 kb - http://www.google.com/ code:200 time(ms):95.969
+#> 27.568 kb - http://www.google.com/ code:200 time(ms):102.025
 attributes(res)
 #> $names
 #> [1] "times"    "averages" "request" 
@@ -90,12 +91,12 @@ Or print a summary of a response, gives more detail
 ```r
 res %>% summary()
 #> <http time, averages (min max mean)>
-#>   Total (s):           69.833 87.641 78.45
-#>   Tedirect (s):        19.933 31.125 23.906
-#>   Namelookup time (s): 0.05 1.884 0.6616667
-#>   Connect (s):         0.054 11.052 3.72
-#>   Pretransfer (s):     0.14 11.174 3.826
-#>   Starttransfer (s):   48.783 57.503 54.06467
+#>   Total (s):           95.969 135.897 111.297
+#>   Tedirect (s):        27.256 49.746 37.41033
+#>   Namelookup time (s): 0.21 3.367 1.371333
+#>   Connect (s):         0.211 39.63 13.45933
+#>   Pretransfer (s):     0.721 39.852 13.791
+#>   Starttransfer (s):   95.425 135.336 110.75
 ```
 
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like
@@ -104,9 +105,9 @@ Messages are printed using `cat`, so you can suppress those using `verbose=FALSE
 ```r
 GET("https://google.com") %>% time(count = 3, verbose = FALSE)
 #> <http time>
-#>   Avg. min (ms):  113.94
-#>   Avg. max (ms):  135.96
-#>   Avg. mean (ms): 128.36
+#>   Avg. min (ms):  100.043
+#>   Avg. max (ms):  216.886
+#>   Avg. mean (ms): 146.554
 ```
 
 
