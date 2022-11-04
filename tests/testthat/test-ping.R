@@ -14,6 +14,7 @@ test_that("ping works", {
   expect_named(aa1$request$request$options, c('useragent', 'httpget'))
 
   aa1req <- httr::content(aa1$request)
+  aa1req$headers$`x-forwarded-for` <- NULL
   aa1req$headers$`connect-time` <- NULL
   aa1req$headers$`x-request-id` <- NULL
   aa1req$headers$`cf-ray` <- NULL
@@ -24,6 +25,7 @@ test_that("ping works", {
   aa1req$headersSize <- NULL
 
   aa2req <- httr::content(aa2$request)
+  aa2req$headers$`x-forwarded-for` <- NULL
   aa2req$headers$`connect-time` <- NULL
   aa2req$headers$`x-request-id` <- NULL
   aa2req$headers$`cf-ray` <- NULL
@@ -42,6 +44,7 @@ test_that("ping works", {
   expect_named(bb1$request$request$options, c('useragent', 'timeout_ms', 'httpget'))
 
   bb1req <- httr::content(bb1$request)
+  bb1req$headers$`x-forwarded-for` <- NULL
   bb1req$headers$`connect-time` <- NULL
   bb1req$headers$`x-request-id` <- NULL
   bb1req$headers$`cookie` <- NULL
@@ -50,6 +53,7 @@ test_that("ping works", {
   bb1req$startedDateTime <- NULL
 
   bb2req <- httr::content(bb2$request)
+  bb2req$headers$`x-forwarded-for` <- NULL
   bb2req$headers$`connect-time` <- NULL
   bb2req$headers$`x-request-id` <- NULL
   bb2req$headers$`cookie` <- NULL
