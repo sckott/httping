@@ -1,3 +1,5 @@
+#' httping 
+#'
 #' Ping urls to time requests
 #'
 #' @import httr
