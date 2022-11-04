@@ -4,7 +4,7 @@
 \name{httping-package}
 \alias{httping-package}
 \alias{httping}
-\title{Ping urls to time requests}
+\title{httping}
 \description{
 Ping urls to time requests
 }

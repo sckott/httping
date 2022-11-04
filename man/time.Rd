@@ -4,8 +4,7 @@
 \alias{time}
 \title{Ping a url to time the request}
 \usage{
-time(.request, count = 10, delay = 0.5, flood = FALSE, verbose = TRUE,
-  ...)
+time(.request, count = 10, delay = 0.5, flood = FALSE, verbose = TRUE, ...)
 }
 \arguments{
 \item{.request}{A \pkg{httr} response object}
