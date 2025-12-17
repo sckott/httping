@@ -14,6 +14,14 @@ You can use this function with or without pipes. We export the pipe
 \code{\%>\%} in this package so you don't have to load it separately.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/sckott/httping}
+  \item Report bugs at \url{https://github.com/sckott/httping/issues}
+}
+
+}
 \author{
 Scott Chamberlain
 }
