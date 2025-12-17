@@ -1,4 +1,4 @@
-#' httping 
+#' httping
 #'
 #' Ping urls to time requests
 #'
@@ -6,7 +6,6 @@
 #' @importFrom methods is
 #' @importFrom stats setNames
 #' @importFrom jsonlite fromJSON
-#' @importFrom pryr object_size
 #' @name httping-package
 #' @aliases httping
 #' @docType package

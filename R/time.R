@@ -46,7 +46,7 @@ rerequest_ <- function(x, delay, verbose=TRUE){
   return(tmp)
 }
 
-get_kb <- function(x) (pryr::object_size(x)/1000)[[1]]
+get_kb <- function(x) (lobstr::obj_size(x) / 1000)[[1]]
 
 #' @export
 print.http_time <- function(x, ...){

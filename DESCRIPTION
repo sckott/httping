@@ -16,9 +16,9 @@ Imports:
     methods,
     stats,
     jsonlite,
-    pryr (>= 0.1.3),
     magrittr,
-    httpcode (>= 0.2.0)
+    httpcode (>= 0.2.0),
+    lobstr
 Suggests:
     testthat
 RoxygenNote: 7.2.1
