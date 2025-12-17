@@ -20,5 +20,6 @@ Imports:
     httpcode (>= 0.2.0),
     lobstr
 Suggests:
-    testthat
-RoxygenNote: 7.2.1
+    testthat,
+    webfakes
+RoxygenNote: 7.3.2
