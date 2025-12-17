@@ -2,8 +2,8 @@
 % Please edit documentation in R/httping-package.R
 \docType{package}
 \name{httping-package}
-\alias{httping-package}
 \alias{httping}
+\alias{httping-package}
 \title{httping}
 \description{
 Ping urls to time requests
@@ -23,6 +23,7 @@ Useful links:
 
 }
 \author{
-Scott Chamberlain
+\strong{Maintainer}: Scott Chamberlain \email{myrmecocystus@gmail.com}
+
 }
-\keyword{package}
+\keyword{internal}
