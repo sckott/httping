@@ -5,7 +5,7 @@ httping
 
 [![cran checks](https://badges.cranchecks.info/worst/httping.svg)](https://cloud.r-project.org/web/checks/check_results_httping.html)
 [![R-check](https://github.com/sckott/httping/actions/workflows/R-check.yaml/badge.svg)](https://github.com/sckott/httping/actions/workflows/R-check.yaml)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
 
 `httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
@@ -15,20 +15,20 @@ httping
 CRAN stable version
 
 
-```r
+``` r
 install.packages("httping")
 ```
 
 Development version from Github
 
 
-```r
+``` r
 install.packages("pak")
-pak::pkg_install("sckott/httping")
+pak::pak("sckott/httping")
 ```
 
 
-```r
+``` r
 library("httping")
 library("httr")
 ```
@@ -38,40 +38,41 @@ library("httr")
 A `GET` request
 
 
-```r
+``` r
 GET("https://google.com") %>% time(count = 3)
-#> 28.984 kb - https://www.google.com/ code:200 time(ms):264.581
-#> 28.712 kb - https://www.google.com/ code:200 time(ms):114.528
-#> 28.12 kb - https://www.google.com/ code:200 time(ms):99.097
+#> 32.656 kb - https://www.google.com/ code:200 time(ms):172.394
+#> 32.472 kb - https://www.google.com/ code:200 time(ms):122.082
+#> 31.504 kb - https://www.google.com/ code:200 time(ms):77.588
 #> <http time>
-#>   Avg. min (ms):  99.097
-#>   Avg. max (ms):  264.581
-#>   Avg. mean (ms): 159.402
+#>   Avg. min (ms):  77.588
+#>   Avg. max (ms):  172.394
+#>   Avg. mean (ms): 124.0213
 ```
 
 A `POST` request
 
 
-```r
-POST("https://mockbin.com/request", body = "A simple text string") %>% time(count = 3)
-#> 12.792 kb - https://mockbin.com/request code:200 time(ms):284.357
-#> 12.792 kb - https://mockbin.com/request code:200 time(ms):204.044
-#> 12.8 kb - https://mockbin.com/request code:200 time(ms):191.969
+``` r
+POST("https://hb.cran.dev/post", body = "A simple text string") %>%
+  time(count = 3)
+#> 11.368 kb - https://hb.cran.dev/post code:200 time(ms):274.325
+#> 11.368 kb - https://hb.cran.dev/post code:200 time(ms):113.367
+#> 11.36 kb - https://hb.cran.dev/post code:200 time(ms):117.252
 #> <http time>
-#>   Avg. min (ms):  191.969
-#>   Avg. max (ms):  284.357
-#>   Avg. mean (ms): 226.79
+#>   Avg. min (ms):  113.367
+#>   Avg. max (ms):  274.325
+#>   Avg. mean (ms): 168.3147
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and
 the delay between requests are included as attributes.
 
 
-```r
+``` r
 res <- GET("http://google.com") %>% time(count = 3)
-#> 28.088 kb - http://www.google.com/ code:200 time(ms):141.951
-#> 27.496 kb - http://www.google.com/ code:200 time(ms):98.195
-#> 27.496 kb - http://www.google.com/ code:200 time(ms):104.658
+#> 31.536 kb - http://www.google.com/ code:200 time(ms):148.827
+#> 31.552 kb - http://www.google.com/ code:200 time(ms):144.872
+#> 30.896 kb - http://www.google.com/ code:200 time(ms):106.855
 attributes(res)
 #> $names
 #> [1] "times"    "averages" "request" 
@@ -89,26 +90,26 @@ attributes(res)
 Or print a summary of a response, gives more detail
 
 
-```r
+``` r
 res %>% summary()
 #> <http time, averages (min max mean)>
-#>   Total (s):           98.195 141.951 114.9347
-#>   Tedirect (s):        28.207 53.277 39.08567
-#>   Namelookup time (s): 0.169 2.89 1.084667
-#>   Connect (s):         0.169 35.54 11.96833
-#>   Pretransfer (s):     0.581 36.418 12.57333
-#>   Starttransfer (s):   97.682 141.644 114.0073
+#>   Total (s):           106.855 148.827 133.518
+#>   Tedirect (s):        35.438 51.067 43.328
+#>   Namelookup time (s): 0 3.29 1.096667
+#>   Connect (s):         0 22.459 7.486333
+#>   Pretransfer (s):     0.446 22.653 7.901
+#>   Starttransfer (s):   105.495 119.818 112.3813
 ```
 
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like
 
 
-```r
+``` r
 GET("https://google.com") %>% time(count = 3, verbose = FALSE)
 #> <http time>
-#>   Avg. min (ms):  94.919
-#>   Avg. max (ms):  228.72
-#>   Avg. mean (ms): 140.0503
+#>   Avg. min (ms):  85.906
+#>   Avg. max (ms):  186.178
+#>   Avg. mean (ms): 143.4717
 ```
 
 
@@ -117,7 +118,7 @@ GET("https://google.com") %>% time(count = 3, verbose = FALSE)
 This function is a bit different, accepts a url as first parameter, but can accept any args passed on to `httr` verb functions, like `GET`, `POST`,  etc.
 
 
-```r
+``` r
 "https://google.com" %>% ping()
 #> <http ping> 200
 #>   Message: OK
@@ -127,7 +128,7 @@ This function is a bit different, accepts a url as first parameter, but can acce
 Or pass in additional arguments to modify request
 
 
-```r
+``` r
 "https://google.com" %>% ping(config = verbose())
 #> <http ping> 200
 #>   Message: OK
@@ -136,4 +137,7 @@ Or pass in additional arguments to modify request
 
 ## Meta
 
-* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+* License: MIT
+* Please note that this project is released with a [Contributor Code of Conduct][coc]. By participating in this project you agree to abide by its terms.
+
+[coc]: https://github.com/sckott/httping/blob/main/.github/CODE_OF_CONDUCT.md

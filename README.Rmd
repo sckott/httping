@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 
 [![cran checks](https://badges.cranchecks.info/worst/httping.svg)](https://cloud.r-project.org/web/checks/check_results_httping.html)
 [![R-check](https://github.com/sckott/httping/actions/workflows/R-check.yaml/badge.svg)](https://github.com/sckott/httping/actions/workflows/R-check.yaml)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
 
 `httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
@@ -29,7 +29,7 @@ Development version from Github
 
 ```{r eval=FALSE}
 install.packages("pak")
-pak::pkg_install("sckott/httping")
+pak::pak("sckott/httping")
 ```
 
 ```{r}
@@ -48,7 +48,8 @@ GET("https://google.com") %>% time(count = 3)
 A `POST` request
 
 ```{r}
-POST("https://mockbin.com/request", body = "A simple text string") %>% time(count = 3)
+POST("https://hb.cran.dev/post", body = "A simple text string") %>%
+  time(count = 3)
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and
@@ -88,4 +89,7 @@ Or pass in additional arguments to modify request
 
 ## Meta
 
-* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+* License: MIT
+* Please note that this project is released with a [Contributor Code of Conduct][coc]. By participating in this project you agree to abide by its terms.
+
+[coc]: https://github.com/sckott/httping/blob/main/.github/CODE_OF_CONDUCT.md
