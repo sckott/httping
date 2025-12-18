@@ -1,3 +1,11 @@
+httping 0.3.0
+=============
+
+### MINOR IMPROVEMENTS
+
+* replace pryr with lobstr
+
+
 httping 0.2.0
 =============
 

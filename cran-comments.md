@@ -1,7 +1,7 @@
 ## Test environments
 
-* local OS X install, R 3.4.3 patched
-* ubuntu 12.04 (on travis-ci), R 3.4.3
+* local macOS, R 4.5.2 patched
+* ubuntu 24 (on gitub actions), R 4.5.2
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -14,7 +14,7 @@ There are no reverse dependencies.
 
 ---
 
-This version includes a fix so the package works with https URLs.
+This version replaces pryr with lobstr as pryr is being archived.
 
 Thanks!
 Scott Chamberlain

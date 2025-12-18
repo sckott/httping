@@ -3,9 +3,9 @@ httping
 
 
 
-[![cran checks](https://badges.cranchecks.info/worst/httping.svg)](https://cloud.r-project.org/web/checks/check_results_httping.html)
+[![cran checks](https://badges.cranchecks.info/worst/httping.svg)](https://cran.r-project.org/package=httping)
 [![R-check](https://github.com/sckott/httping/actions/workflows/R-check.yaml/badge.svg)](https://github.com/sckott/httping/actions/workflows/R-check.yaml)
-[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/httping?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/httping)](https://cran.r-project.org/package=httping)
 
 `httping` is a tiny R package to Ping urls to time requests. It's a port of the Ruby gem [httping](https://github.com/jpignata/httping).
@@ -40,13 +40,13 @@ A `GET` request
 
 ``` r
 GET("https://google.com") %>% time(count = 3)
-#> 32.656 kb - https://www.google.com/ code:200 time(ms):172.394
-#> 32.472 kb - https://www.google.com/ code:200 time(ms):122.082
-#> 31.504 kb - https://www.google.com/ code:200 time(ms):77.588
+#> 32.824 kb - https://www.google.com/ code:200 time(ms):159.863
+#> 32.576 kb - https://www.google.com/ code:200 time(ms):175.996
+#> 31.6 kb - https://www.google.com/ code:200 time(ms):74.762
 #> <http time>
-#>   Avg. min (ms):  77.588
-#>   Avg. max (ms):  172.394
-#>   Avg. mean (ms): 124.0213
+#>   Avg. min (ms):  74.762
+#>   Avg. max (ms):  175.996
+#>   Avg. mean (ms): 136.8737
 ```
 
 A `POST` request
@@ -55,13 +55,13 @@ A `POST` request
 ``` r
 POST("https://hb.cran.dev/post", body = "A simple text string") %>%
   time(count = 3)
-#> 11.368 kb - https://hb.cran.dev/post code:200 time(ms):274.325
-#> 11.368 kb - https://hb.cran.dev/post code:200 time(ms):113.367
-#> 11.36 kb - https://hb.cran.dev/post code:200 time(ms):117.252
+#> 11.368 kb - https://hb.cran.dev/post code:200 time(ms):301.873
+#> 11.368 kb - https://hb.cran.dev/post code:200 time(ms):91.587
+#> 11.368 kb - https://hb.cran.dev/post code:200 time(ms):94.93
 #> <http time>
-#>   Avg. min (ms):  113.367
-#>   Avg. max (ms):  274.325
-#>   Avg. mean (ms): 168.3147
+#>   Avg. min (ms):  91.587
+#>   Avg. max (ms):  301.873
+#>   Avg. mean (ms): 162.7967
 ```
 
 The return object is a list with slots for all the `httr` response objects, the times for each request, and the average times. The number of requests, and
@@ -70,9 +70,9 @@ the delay between requests are included as attributes.
 
 ``` r
 res <- GET("http://google.com") %>% time(count = 3)
-#> 31.536 kb - http://www.google.com/ code:200 time(ms):148.827
-#> 31.552 kb - http://www.google.com/ code:200 time(ms):144.872
-#> 30.896 kb - http://www.google.com/ code:200 time(ms):106.855
+#> 31.552 kb - http://www.google.com/ code:200 time(ms):128.805
+#> 31.552 kb - http://www.google.com/ code:200 time(ms):213.895
+#> 30.912 kb - http://www.google.com/ code:200 time(ms):356.413
 attributes(res)
 #> $names
 #> [1] "times"    "averages" "request" 
@@ -93,12 +93,12 @@ Or print a summary of a response, gives more detail
 ``` r
 res %>% summary()
 #> <http time, averages (min max mean)>
-#>   Total (s):           106.855 148.827 133.518
-#>   Tedirect (s):        35.438 51.067 43.328
-#>   Namelookup time (s): 0 3.29 1.096667
-#>   Connect (s):         0 22.459 7.486333
-#>   Pretransfer (s):     0.446 22.653 7.901
-#>   Starttransfer (s):   105.495 119.818 112.3813
+#>   Total (s):           128.805 356.413 233.0377
+#>   Tedirect (s):        39.403 300.023 126.666
+#>   Namelookup time (s): 0 4.086 1.362
+#>   Connect (s):         0 22.169 7.389667
+#>   Pretransfer (s):     0.52 22.268 7.798667
+#>   Starttransfer (s):   107.22 355.05 219.8817
 ```
 
 Messages are printed using `cat`, so you can suppress those using `verbose=FALSE`, like
@@ -107,9 +107,9 @@ Messages are printed using `cat`, so you can suppress those using `verbose=FALSE
 ``` r
 GET("https://google.com") %>% time(count = 3, verbose = FALSE)
 #> <http time>
-#>   Avg. min (ms):  85.906
-#>   Avg. max (ms):  186.178
-#>   Avg. mean (ms): 143.4717
+#>   Avg. min (ms):  85.052
+#>   Avg. max (ms):  197.077
+#>   Avg. mean (ms): 154.5787
 ```
 
 
